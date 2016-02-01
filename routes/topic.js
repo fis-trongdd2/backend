@@ -18,8 +18,8 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     var body = req.body;
-    if (body.id) {
-        var _id = mongoose.Types.ObjectId(body.id);
+    if (body['id']) {
+        var _id = mongoose.Types.ObjectId(body['id']);
         Topic.find({_id: _id}, function (err, topic) {
             if (err) {
                 throw err;
@@ -30,7 +30,7 @@ router.post('/', function (req, res, next) {
             else {
                 Topic.update({_id: _id}, body, function (err, updatedTopic) {
                     if (error) throw err;
-                    res.send('success');
+                    res.send({status: 'updated'});
                 });
             }
         })

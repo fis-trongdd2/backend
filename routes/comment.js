@@ -18,8 +18,8 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     var body = req.body;
-    if (body.id) {
-        var _id = mongoose.Types.ObjectId(body.id);
+    if (body['id']) {
+        var _id = mongoose.Types.ObjectId(body['id']);
         Comment.find({_id: _id}, function (err, comment) {
             if (err) {
                 throw err;
@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
                 body.edited = true;
                 Comment.update({_id: _id}, body, function (err, updatedComment) {
                     if (error) throw err;
-                    res.send('success');
+                    res.send({status: 'updated'});
                 });
             }
         })

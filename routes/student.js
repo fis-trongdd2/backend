@@ -17,8 +17,8 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     var body = req.body;
-    if (body.username) {
-        Student.find({username: body.username}, function (err, student) {
+    if (body['username']) {
+        Student.find({username: body['username']}, function (err, student) {
             if (err) {
                 throw err;
             }
@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
             else {
                 Student.update({username: body.username}, body, function (err, updatedStudent) {
                     if (err) throw err;
-                    res.send('success');
+                    res.send({status: 'updated'});
                 });
             }
         });
